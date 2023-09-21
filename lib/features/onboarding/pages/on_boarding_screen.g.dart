@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'OnBoardingScreen.dart';
+part of 'on_boarding_screen.dart';
 
 // **************************************************************************
 // RiverpodGenerator

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:rick_morty_universe/features/authentication/AuthenticationScreen.dart';
+import 'package:rick_morty_universe/features/authentication/presentation/pages/authentication_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'OnBoardingScreen.g.dart';
+part 'on_boarding_screen.g.dart';
 
 @riverpod
 class OnBoardingProgress extends _$OnBoardingProgress {
@@ -16,10 +16,10 @@ class OnBoardingProgress extends _$OnBoardingProgress {
     state = pageIndex == 0
         ? 0.25
         : pageIndex == 1
-        ? 0.50
-        : pageIndex == 2
-        ? 0.75
-        : 1;
+            ? 0.50
+            : pageIndex == 2
+                ? 0.75
+                : 1;
   }
 }
 
@@ -76,6 +76,7 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
     final progressUpdater = ref.watch(onBoardingProgressProvider.notifier);
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Center(
           child: Column(
@@ -102,9 +103,19 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
                 ),
                 child: Row(
                   children: [
-                    const Text(
-                      'Skip',
-                      style: TextStyle(fontSize: 16),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const AuthenticationScreen()),
+                            ModalRoute.withName('/authentication'));
+                      },
+                      child: const Text(
+                        'Skip',
+                        style: TextStyle(fontSize: 16),
+                      ),
                     ),
                     const Spacer(),
                     SizedBox(
@@ -141,12 +152,12 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
                               curve: Curves.linearToEaseOut,
                             );
                           } else {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const AuthenticationScreen()),
-                            );
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const AuthenticationScreen()),
+                                ModalRoute.withName('/authentication'));
                           }
                         },
                       ),
