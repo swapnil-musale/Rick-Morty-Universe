@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:rick_morty_universe/features/dashboard/domain/entities/characters_response.dart';
 
 class CharacterDetailsScreen extends StatefulWidget {
-  const CharacterDetailsScreen({super.key});
+  final CharacterItem characterItem;
+
+  const CharacterDetailsScreen({super.key, required this.characterItem});
 
   @override
   State<CharacterDetailsScreen> createState() => _CharacterDetailsScreenState();
@@ -10,11 +13,20 @@ class CharacterDetailsScreen extends StatefulWidget {
 class _CharacterDetailsScreenState extends State<CharacterDetailsScreen> {
   @override
   Widget build(BuildContext context) {
+    widget.characterItem;
     return Scaffold(
       appBar: AppBar(),
-      body: const SafeArea(
+      body: SafeArea(
         child: Center(
-          child: Text('Character Details Screen'),
+          child: Column(
+            children: [
+              Text('${widget.characterItem.name} - Character Details'),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text('Add To Favorite'),
+              )
+            ],
+          ),
         ),
       ),
     );
