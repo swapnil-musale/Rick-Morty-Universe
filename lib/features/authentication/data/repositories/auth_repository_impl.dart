@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:injectable/injectable.dart';
 import 'package:rick_morty_universe/core/utils/Constants.dart';
 import 'package:rick_morty_universe/features/authentication/data/models/auth_user_model.dart';
 import 'package:rick_morty_universe/features/authentication/domain/entities/auth_user.dart';
 import 'package:rick_morty_universe/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+@injectable
 class AuthRepositoryImpl implements AuthRepository {
   final firebase_auth.FirebaseAuth _firebaseAuth =
       firebase_auth.FirebaseAuth.instance;
@@ -24,6 +26,7 @@ class AuthRepositoryImpl implements AuthRepository {
           .signInWithEmailAndPassword(email: email, password: password);
 
       if (credential.user != null) {
+        setUserLoggedIn(true);
         return AuthUserModel.firebaseAuthUser(credential.user!).toEntity();
       } else {
         throw Exception("User is Null");
@@ -34,6 +37,7 @@ class AuthRepositoryImpl implements AuthRepository {
             .createUserWithEmailAndPassword(email: email, password: password);
 
         if (credential.user != null) {
+          setUserLoggedIn(true);
           return AuthUserModel.firebaseAuthUser(credential.user!).toEntity();
         } else {
           throw Exception("User is Null");

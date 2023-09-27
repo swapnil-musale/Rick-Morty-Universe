@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:rick_morty_universe/features/dashboard/data/repositories/dashboard_repository_impl.dart';
-import 'package:rick_morty_universe/features/dashboard/domain/repositories/dashboard_repository.dart';
 import 'package:rick_morty_universe/features/dashboard/domain/use_cases/get_characters_use_case.dart';
-import 'package:rick_morty_universe/features/dashboard/presentation/pages/character_details_screen.dart';
+import 'package:rick_morty_universe/features/dashboard/presentation/pages/character_details/character_details_screen.dart';
+import 'package:rick_morty_universe/features/injection_container.dart';
 
 class CharactersScreen extends StatefulWidget {
   const CharactersScreen({super.key});
@@ -15,13 +14,19 @@ class _CharactersScreenState extends State<CharactersScreen> {
   late GetCharactersUseCase getCharactersUseCase;
 
   @override
+  void initState() {
+    super.initState();
+    getCharactersUseCase = serviceLocator<GetCharactersUseCase>();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
             FutureBuilder(
-                future: getCharactersUseCase.call(),
+                future: getCharactersUseCase(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData &&
                       snapshot.connectionState == ConnectionState.done) {
@@ -35,9 +40,8 @@ class _CharactersScreenState extends State<CharactersScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    CharacterDetailsScreen(
-                                      characterItem:
+                                builder: (context) => CharacterDetailsScreen(
+                                  characterItem:
                                       snapshot.data!.characterList[index],
                                 ),
                               ),
@@ -57,13 +61,5 @@ class _CharactersScreenState extends State<CharactersScreen> {
         ),
       ),
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    final DashBoardRepository dashBoardRepository = DashBoardRepositoryImpl();
-    getCharactersUseCase =
-        GetCharactersUseCase(dashBoardRepository: dashBoardRepository);
   }
 }

@@ -101,18 +101,19 @@ class Results {
 
   CharacterItem toEntity() {
     return CharacterItem(
-        id: id,
-        name: name,
-        status: status,
-        species: species,
-        type: type,
-        gender: gender,
-        // origin: originm,
-        // location: location,
-        image: image,
-        episode: episode,
-        url: url,
-        created: created);
+      id: id,
+      name: name,
+      status: status,
+      species: species,
+      type: type,
+      gender: gender,
+      // origin: originm,
+      // location: location,
+      image: image,
+      url: url,
+      created: created,
+      isFavorite: false,
+    );
   }
 
   Results.fromJson(Map<String, dynamic> json) {

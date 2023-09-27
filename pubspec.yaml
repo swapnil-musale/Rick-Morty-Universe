@@ -38,6 +38,11 @@ dependencies:
   shared_preferences: ^2.2.1
   dio: ^5.3.3
   retrofit: ^4.0.1
+  floor: ^1.4.2
+  sqflite: ^2.3.0
+  awesome_flutter_extensions: ^1.1.1
+  injectable: ^2.3.0
+  get_it: ^7.6.4
 
 dev_dependencies:
   flutter_test:
@@ -48,6 +53,8 @@ dev_dependencies:
   riverpod_lint: ^2.0.3
   retrofit_generator: ^7.0.8
   json_serializable: ^6.7.1
+  floor_generator: ^1.4.2
+  injectable_generator: ^2.3.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -74,6 +81,7 @@ flutter:
     - assets/images/onboarding_image_3.jpg
     - assets/images/rick_and_morty_auth_bg.png
     - assets/images/rick_and_morty_text.png
+    - assets/images/rick_and_morty_auth.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

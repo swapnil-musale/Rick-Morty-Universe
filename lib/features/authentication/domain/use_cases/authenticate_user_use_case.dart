@@ -1,13 +1,17 @@
+import 'package:injectable/injectable.dart';
+import 'package:rick_morty_universe/features/authentication/domain/entities/auth_user.dart';
 import 'package:rick_morty_universe/features/authentication/domain/repositories/auth_repository.dart';
 
-import '../entities/auth_user.dart';
-
+@singleton
 class AuthenticateUserUseCase {
   final AuthRepository authRepository;
 
   AuthenticateUserUseCase({required this.authRepository});
 
-  Future<AuthUser> call({required String email, required String password}) async {
+  Future<AuthUser> call({
+    required String email,
+    required String password,
+  }) async {
     try {
       return await authRepository.authenticateUser(
         email: email,

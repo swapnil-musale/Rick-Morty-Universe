@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rick_morty_universe/features/dashboard/presentation/pages/characters_screen.dart';
-import 'package:rick_morty_universe/features/dashboard/presentation/pages/favorite_character_screen.dart';
+import 'package:rick_morty_universe/features/dashboard/presentation/pages/character/characters_screen.dart';
+import 'package:rick_morty_universe/features/dashboard/presentation/pages/favorite/favorite_character_screen.dart';
 import 'package:rick_morty_universe/features/settings/presentation/pages/SettingsScreen.dart';
 
 class DashboardScreen extends StatefulWidget {
