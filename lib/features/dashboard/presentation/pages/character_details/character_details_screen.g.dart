@@ -7,7 +7,7 @@ part of 'character_details_screen.dart';
 // **************************************************************************
 
 String _$isCharacterFavoriteHash() =>
-    r'010b3f0f4c66fe6773313895b68056d0896cd40e';
+    r'0a462f0229f10f1b84c3b8113329ac97839aab46';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -41,12 +41,10 @@ class IsCharacterFavoriteFamily extends Family<AsyncValue<bool?>> {
 
   /// See also [isCharacterFavorite].
   IsCharacterFavoriteProvider call({
-    required int id,
-    required GetCharacterUseCase characterUseCase,
+    required int characterId,
   }) {
     return IsCharacterFavoriteProvider(
-      id: id,
-      characterUseCase: characterUseCase,
+      characterId: characterId,
     );
   }
 
@@ -55,8 +53,7 @@ class IsCharacterFavoriteFamily extends Family<AsyncValue<bool?>> {
     covariant IsCharacterFavoriteProvider provider,
   ) {
     return call(
-      id: provider.id,
-      characterUseCase: provider.characterUseCase,
+      characterId: provider.characterId,
     );
   }
 
@@ -79,13 +76,11 @@ class IsCharacterFavoriteFamily extends Family<AsyncValue<bool?>> {
 class IsCharacterFavoriteProvider extends AutoDisposeFutureProvider<bool?> {
   /// See also [isCharacterFavorite].
   IsCharacterFavoriteProvider({
-    required int id,
-    required GetCharacterUseCase characterUseCase,
+    required int characterId,
   }) : this._internal(
           (ref) => isCharacterFavorite(
             ref as IsCharacterFavoriteRef,
-            id: id,
-            characterUseCase: characterUseCase,
+            characterId: characterId,
           ),
           from: isCharacterFavoriteProvider,
           name: r'isCharacterFavoriteProvider',
@@ -96,8 +91,7 @@ class IsCharacterFavoriteProvider extends AutoDisposeFutureProvider<bool?> {
           dependencies: IsCharacterFavoriteFamily._dependencies,
           allTransitiveDependencies:
               IsCharacterFavoriteFamily._allTransitiveDependencies,
-          id: id,
-          characterUseCase: characterUseCase,
+          characterId: characterId,
         );
 
   IsCharacterFavoriteProvider._internal(
@@ -107,12 +101,10 @@ class IsCharacterFavoriteProvider extends AutoDisposeFutureProvider<bool?> {
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.id,
-    required this.characterUseCase,
+    required this.characterId,
   }) : super.internal();
 
-  final int id;
-  final GetCharacterUseCase characterUseCase;
+  final int characterId;
 
   @override
   Override overrideWith(
@@ -127,8 +119,7 @@ class IsCharacterFavoriteProvider extends AutoDisposeFutureProvider<bool?> {
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        id: id,
-        characterUseCase: characterUseCase,
+        characterId: characterId,
       ),
     );
   }
@@ -141,26 +132,21 @@ class IsCharacterFavoriteProvider extends AutoDisposeFutureProvider<bool?> {
   @override
   bool operator ==(Object other) {
     return other is IsCharacterFavoriteProvider &&
-        other.id == id &&
-        other.characterUseCase == characterUseCase;
+        other.characterId == characterId;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, id.hashCode);
-    hash = _SystemHash.combine(hash, characterUseCase.hashCode);
+    hash = _SystemHash.combine(hash, characterId.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
 
 mixin IsCharacterFavoriteRef on AutoDisposeFutureProviderRef<bool?> {
-  /// The parameter `id` of this provider.
-  int get id;
-
-  /// The parameter `characterUseCase` of this provider.
-  GetCharacterUseCase get characterUseCase;
+  /// The parameter `characterId` of this provider.
+  int get characterId;
 }
 
 class _IsCharacterFavoriteProviderElement
@@ -169,10 +155,7 @@ class _IsCharacterFavoriteProviderElement
   _IsCharacterFavoriteProviderElement(super.provider);
 
   @override
-  int get id => (origin as IsCharacterFavoriteProvider).id;
-  @override
-  GetCharacterUseCase get characterUseCase =>
-      (origin as IsCharacterFavoriteProvider).characterUseCase;
+  int get characterId => (origin as IsCharacterFavoriteProvider).characterId;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rick_morty_universe/features/dashboard/domain/use_cases/get_characters_use_case.dart';
-import 'package:rick_morty_universe/features/dashboard/presentation/pages/character_details/character_details_screen.dart';
+import 'package:rick_morty_universe/features/dashboard/presentation/pages/character/character_item_widget.dart';
 import 'package:rick_morty_universe/features/injection_container.dart';
 
 class CharactersScreen extends StatefulWidget {
@@ -12,6 +12,7 @@ class CharactersScreen extends StatefulWidget {
 
 class _CharactersScreenState extends State<CharactersScreen> {
   late GetCharactersUseCase getCharactersUseCase;
+  final ScrollController _controller = ScrollController();
 
   @override
   void initState() {
@@ -23,41 +24,26 @@ class _CharactersScreenState extends State<CharactersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            FutureBuilder(
-                future: getCharactersUseCase(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData &&
-                      snapshot.connectionState == ConnectionState.done) {
-                    return ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      itemCount: snapshot.data!.characterList.length,
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => CharacterDetailsScreen(
-                                  characterItem:
-                                      snapshot.data!.characterList[index],
-                                ),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            snapshot.data!.characterList[index].name ?? '',
-                          ),
-                        );
-                      },
+        child: FutureBuilder(
+          future: getCharactersUseCase(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData &&
+                snapshot.connectionState == ConnectionState.done) {
+              return NotificationListener(
+                child: ListView.builder(
+                  controller: _controller,
+                  itemCount: snapshot.data!.characterList.length,
+                  itemBuilder: (context, index) {
+                    return CharacterItemWidget(
+                      characterItem: snapshot.data!.characterList[index],
                     );
-                  } else {
-                    return const CircularProgressIndicator();
-                  }
-                }),
-          ],
+                  },
+                ),
+              );
+            } else {
+              return const Center(child: CircularProgressIndicator());
+            }
+          },
         ),
       ),
     );

@@ -2,10 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rick_morty_universe/core/navigation/app_routes.dart';
-import 'package:rick_morty_universe/di/injection.dart';
 import 'package:rick_morty_universe/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:rick_morty_universe/features/injection_container.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'firebase_options.dart';
 
@@ -13,14 +11,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await initializeDependencies();
-  configureDependencies();
-  SharedPreferences.getInstance().then((pref) {
-    runApp(
-      const ProviderScope(
-        child: MyApp(),
-      ),
-    );
-  });
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

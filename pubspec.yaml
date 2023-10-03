@@ -43,6 +43,7 @@ dependencies:
   awesome_flutter_extensions: ^1.1.1
   injectable: ^2.3.0
   get_it: ^7.6.4
+  transparent_image: ^2.0.1
 
 dev_dependencies:
   flutter_test:
@@ -81,7 +82,7 @@ flutter:
     - assets/images/onboarding_image_3.jpg
     - assets/images/rick_and_morty_auth_bg.png
     - assets/images/rick_and_morty_text.png
-    - assets/images/rick_and_morty_auth.png
+    - assets/images/rick_and_morty_auth.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -28,7 +28,7 @@ class CharacterItem {
   String? image;
   String? url;
   String? created;
-  bool? isFavorite;
+  bool? isFavorites;
 
   CharacterItem({
     this.id,
@@ -40,8 +40,12 @@ class CharacterItem {
     this.image,
     this.url,
     this.created,
-    this.isFavorite,
+    this.isFavorites,
   });
+
+  CharacterItem empty() {
+    return CharacterItem();
+  }
 }
 
 class Origin {

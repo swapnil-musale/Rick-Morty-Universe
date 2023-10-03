@@ -6,7 +6,6 @@ import 'package:rick_morty_universe/features/authentication/domain/entities/auth
 import 'package:rick_morty_universe/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-@injectable
 class AuthRepositoryImpl implements AuthRepository {
   final firebase_auth.FirebaseAuth _firebaseAuth =
       firebase_auth.FirebaseAuth.instance;
@@ -23,7 +22,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }) async {
     try {
       firebase_auth.UserCredential credential = await _firebaseAuth
-          .signInWithEmailAndPassword(email: email, password: password);
+          .createUserWithEmailAndPassword(email: email, password: password);
 
       if (credential.user != null) {
         setUserLoggedIn(true);
@@ -32,9 +31,9 @@ class AuthRepositoryImpl implements AuthRepository {
         throw Exception("User is Null");
       }
     } on firebase_auth.FirebaseAuthException catch (error) {
-      if (error.code == 'user-not-found') {
+      if (error.code == 'email-already-in-use') {
         firebase_auth.UserCredential credential = await _firebaseAuth
-            .createUserWithEmailAndPassword(email: email, password: password);
+            .signInWithEmailAndPassword(email: email, password: password);
 
         if (credential.user != null) {
           setUserLoggedIn(true);

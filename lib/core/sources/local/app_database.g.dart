@@ -85,7 +85,7 @@ class _$AppDatabase extends AppDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `CharacterItem` (`id` INTEGER, `name` TEXT, `status` TEXT, `species` TEXT, `type` TEXT, `gender` TEXT, `image` TEXT, `url` TEXT, `created` TEXT, `isFavorite` INTEGER, PRIMARY KEY (`id`))');
+            'CREATE TABLE IF NOT EXISTS `CharacterItem` (`id` INTEGER, `name` TEXT, `status` TEXT, `species` TEXT, `type` TEXT, `gender` TEXT, `image` TEXT, `url` TEXT, `created` TEXT, `isFavorites` INTEGER, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -117,9 +117,9 @@ class _$CharacterDao extends CharacterDao {
                   'image': item.image,
                   'url': item.url,
                   'created': item.created,
-                  'isFavorite': item.isFavorite == null
+                  'isFavorites': item.isFavorites == null
                       ? null
-                      : (item.isFavorite! ? 1 : 0)
+                      : (item.isFavorites! ? 1 : 0)
                 }),
         _characterItemDeletionAdapter = DeletionAdapter(
             database,
@@ -135,9 +135,9 @@ class _$CharacterDao extends CharacterDao {
                   'image': item.image,
                   'url': item.url,
                   'created': item.created,
-                  'isFavorite': item.isFavorite == null
+                  'isFavorites': item.isFavorites == null
                       ? null
-                      : (item.isFavorite! ? 1 : 0)
+                      : (item.isFavorites! ? 1 : 0)
                 });
 
   final sqflite.DatabaseExecutor database;
@@ -163,9 +163,9 @@ class _$CharacterDao extends CharacterDao {
             image: row['image'] as String?,
             url: row['url'] as String?,
             created: row['created'] as String?,
-            isFavorite: row['isFavorite'] == null
+            isFavorites: row['isFavorites'] == null
                 ? null
-                : (row['isFavorite'] as int) != 0));
+                : (row['isFavorites'] as int) != 0));
   }
 
   @override
@@ -181,9 +181,9 @@ class _$CharacterDao extends CharacterDao {
             image: row['image'] as String?,
             url: row['url'] as String?,
             created: row['created'] as String?,
-            isFavorite: row['isFavorite'] == null
+            isFavorites: row['isFavorites'] == null
                 ? null
-                : (row['isFavorite'] as int) != 0),
+                : (row['isFavorites'] as int) != 0),
         arguments: [id]);
   }
 

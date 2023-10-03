@@ -1,8 +1,6 @@
-import 'package:injectable/injectable.dart';
 import 'package:rick_morty_universe/features/authentication/domain/entities/auth_user.dart';
 import 'package:rick_morty_universe/features/authentication/domain/repositories/auth_repository.dart';
 
-@singleton
 class AuthenticateUserUseCase {
   final AuthRepository authRepository;
 

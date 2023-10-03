@@ -112,7 +112,7 @@ class Results {
       image: image,
       url: url,
       created: created,
-      isFavorite: false,
+      isFavorites: false,
     );
   }
 
