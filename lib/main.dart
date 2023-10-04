@@ -3,45 +3,42 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rick_morty_universe/core/navigation/app_routes.dart';
 import 'package:rick_morty_universe/features/authentication/domain/repositories/auth_repository.dart';
-import 'package:rick_morty_universe/features/injection_container.dart';
+import 'package:rick_morty_universe/providers.dart';
 
 import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await initializeDependencies();
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(const ProviderScope(child: RickMortyApp()));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class RickMortyApp extends ConsumerWidget {
+  const RickMortyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Rick and Morty',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      themeMode: ThemeMode.light,
       routes: AppRoutes.routes,
-      initialRoute: _getInitialRoute(),
+      initialRoute: _getInitialRoute(ref),
     );
   }
 
-  String _getInitialRoute() {
-    final AuthRepository authRepository = serviceLocator<AuthRepository>();
+  String _getInitialRoute(WidgetRef ref) {
+    final AuthRepository authRepository =
+        ref.watch(getAuthRepositoryImplProvider);
     if (authRepository.getIsOnboardingOpened()) {
       if (authRepository.getUserLoggedIn()) {
-        return "/dashboard";
+        return '/dashboard';
       } else {
-        return "/authentication";
+        return '/authentication';
       }
     } else {
       authRepository.setIsOnboardingOpened(true);
-      return "/onboarding";
+      return '/onboarding';
     }
   }
 }

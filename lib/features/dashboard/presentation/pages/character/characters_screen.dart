@@ -1,27 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rick_morty_universe/features/dashboard/domain/use_cases/get_characters_use_case.dart';
 import 'package:rick_morty_universe/features/dashboard/presentation/pages/character/character_item_widget.dart';
-import 'package:rick_morty_universe/features/injection_container.dart';
+import 'package:rick_morty_universe/providers.dart';
 
-class CharactersScreen extends StatefulWidget {
+class CharactersScreen extends ConsumerStatefulWidget {
   const CharactersScreen({super.key});
 
   @override
-  State<CharactersScreen> createState() => _CharactersScreenState();
+  ConsumerState<CharactersScreen> createState() => _CharactersScreenState();
 }
 
-class _CharactersScreenState extends State<CharactersScreen> {
+class _CharactersScreenState extends ConsumerState<CharactersScreen> {
   late GetCharactersUseCase getCharactersUseCase;
   final ScrollController _controller = ScrollController();
 
   @override
-  void initState() {
-    super.initState();
-    getCharactersUseCase = serviceLocator<GetCharactersUseCase>();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    getCharactersUseCase = ref.watch(getCharactersUseCaseProvider);
+
     return Scaffold(
       body: SafeArea(
         child: FutureBuilder(

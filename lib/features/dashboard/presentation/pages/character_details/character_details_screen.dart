@@ -3,10 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rick_morty_universe/core/utils/string_ext.dart';
 import 'package:rick_morty_universe/features/dashboard/domain/entities/characters_response.dart';
 import 'package:rick_morty_universe/features/dashboard/domain/use_cases/delete_character_from_local_use_case.dart';
-import 'package:rick_morty_universe/features/dashboard/domain/use_cases/get_character_from_id_use_case.dart';
 import 'package:rick_morty_universe/features/dashboard/domain/use_cases/save_character_in_local_use_case.dart';
 import 'package:rick_morty_universe/features/dashboard/presentation/pages/character_details/character_info_text_widget.dart';
-import 'package:rick_morty_universe/features/injection_container.dart';
+import 'package:rick_morty_universe/providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'character_details_screen.g.dart';
@@ -14,7 +13,8 @@ part 'character_details_screen.g.dart';
 @riverpod
 Future<bool?> isCharacterFavorite(IsCharacterFavoriteRef ref,
     {required int characterId}) async {
-  final getCharacterUseCase = serviceLocator.get<GetCharacterUseCase>();
+  final getCharacterUseCase =
+      ref.watch(getCharacterUseCaseProvider);
   return await getCharacterUseCase
       .call(characterId)
       .then((value) => value?.isFavorites);
@@ -36,22 +36,17 @@ class _CharacterDetailsScreenState
   late DeleteCharacterFromLocalUseCase _deleteCharacterFromLocalUseCase;
 
   @override
-  void initState() {
-    _saveCharacterInLocalUseCase =
-        serviceLocator.get<SaveCharacterInLocalUseCase>();
-    _deleteCharacterFromLocalUseCase =
-        serviceLocator.get<DeleteCharacterFromLocalUseCase>();
-    super.initState();
-  }
-
-  @override
   Scaffold build(BuildContext context) {
+    _saveCharacterInLocalUseCase =
+        ref.watch(getSaveCharacterInLocalUseCaseProvider);
+    _deleteCharacterFromLocalUseCase =
+        ref.watch(getDeleteCharacterFromLocalUseCaseProvider);
+
     var isFavorite = ref
         .watch(isCharacterFavoriteProvider(
           characterId: widget.characterItem.id ?? 0,
         ))
         .valueOrNull;
-    print('Received : $isFavorite');
 
     return Scaffold(
       body: SafeArea(
@@ -89,45 +84,31 @@ class _CharacterDetailsScreenState
                     Positioned(
                       right: 20,
                       bottom: 20,
-                      child: ClipRRect(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(50)),
-                        child: Container(
-                          alignment: Alignment.center,
-                          height: 40,
-                          width: 40,
-                          color: Theme.of(context).primaryColor,
-                          child: IconButton(
-                            icon: Icon(
-                              isFavorite == true
-                                  ? Icons.star
-                                  : Icons.star_border,
-                              color: Colors.white,
-                            ),
-                            onPressed: () async {
-                              if (isFavorite == true) {
-                                print('remove');
-                                await _deleteCharacterFromLocalUseCase
-                                    .call(widget.characterItem);
-                                isFavorite = ref
-                                    .refresh(isCharacterFavoriteProvider(
-                                  characterId: widget.characterItem.id ?? 0,
-                                ))
-                                    .valueOrNull;
-                              } else {
-                                print('add');
-                                widget.characterItem.isFavorites = true;
-                                await _saveCharacterInLocalUseCase
-                                    .call(widget.characterItem);
-                                isFavorite = ref
-                                    .refresh(isCharacterFavoriteProvider(
-                                      characterId: widget.characterItem.id ?? 0,
-                                    ))
-                                    .valueOrNull;
-                              }
-                            },
-                          ),
+                      child: FloatingActionButton(
+                        child: Icon(
+                          isFavorite == true ? Icons.star : Icons.star_border,
+                          size: 32,
                         ),
+                        onPressed: () async {
+                          if (isFavorite == true) {
+                            await _deleteCharacterFromLocalUseCase
+                                .call(widget.characterItem);
+                            ref.invalidate(
+                              isCharacterFavoriteProvider(
+                                characterId: widget.characterItem.id ?? 0,
+                              ),
+                            );
+                          } else {
+                            widget.characterItem.isFavorites = true;
+                            await _saveCharacterInLocalUseCase
+                                .call(widget.characterItem);
+                            ref.invalidate(
+                              isCharacterFavoriteProvider(
+                                characterId: widget.characterItem.id ?? 0,
+                              ),
+                            );
+                          }
+                        },
                       ),
                     ),
                   ],

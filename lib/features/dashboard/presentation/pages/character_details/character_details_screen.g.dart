@@ -7,7 +7,7 @@ part of 'character_details_screen.dart';
 // **************************************************************************
 
 String _$isCharacterFavoriteHash() =>
-    r'0a462f0229f10f1b84c3b8113329ac97839aab46';
+    r'6631858d9f1f8f73e9dea0e3a86f79936d1caa08';
 
 /// Copied from Dart SDK
 class _SystemHash {

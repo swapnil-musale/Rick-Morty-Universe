@@ -41,7 +41,10 @@ class _CharacterItemWidgetState extends State<CharacterItemWidget> {
                     ],
                   ),
                   FloatingActionButton(
-                    child: const Icon(Icons.arrow_circle_right_outlined),
+                    child: const Icon(
+                      Icons.arrow_circle_right_outlined,
+                      size: 32,
+                    ),
                     onPressed: () {
                       Navigator.push(
                         context,

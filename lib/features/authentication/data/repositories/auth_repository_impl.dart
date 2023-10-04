@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import 'package:injectable/injectable.dart';
 import 'package:rick_morty_universe/core/utils/Constants.dart';
 import 'package:rick_morty_universe/features/authentication/data/models/auth_user_model.dart';
 import 'package:rick_morty_universe/features/authentication/domain/entities/auth_user.dart';

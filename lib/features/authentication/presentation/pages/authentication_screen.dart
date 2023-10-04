@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rick_morty_universe/features/authentication/domain/use_cases/authenticate_user_use_case.dart';
 import 'package:rick_morty_universe/features/dashboard/presentation/pages/dashboard_screen.dart';
-import 'package:rick_morty_universe/features/injection_container.dart';
+import 'package:rick_morty_universe/providers.dart';
 
-class AuthenticationScreen extends StatefulWidget {
+class AuthenticationScreen extends ConsumerStatefulWidget {
   const AuthenticationScreen({super.key});
 
   @override
-  State<AuthenticationScreen> createState() => _AuthenticationScreenState();
+  ConsumerState<AuthenticationScreen> createState() =>
+      _AuthenticationScreenState();
 }
 
-class _AuthenticationScreenState extends State<AuthenticationScreen> {
+class _AuthenticationScreenState extends ConsumerState<AuthenticationScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -21,8 +23,6 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
     // TODO Remove hardcoded
     emailController.text = "rick@morty.com";
     passwordController.text = "123456789";
-
-    _authenticateUserUseCase = serviceLocator<AuthenticateUserUseCase>();
     super.initState();
   }
 
@@ -35,6 +35,8 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    _authenticateUserUseCase = ref.watch(getAuthenticateUserUseCaseProvider);
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
