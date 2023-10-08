@@ -47,7 +47,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ],
         backgroundColor: const Color(0xFFF1EDF5),
       ),
-      body: Center(
+      body: Container(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
