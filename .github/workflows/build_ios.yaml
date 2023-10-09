@@ -20,7 +20,7 @@ jobs:
       - run: flutter pub get
       - run: flutter test
       - run:  |
-          flutter build ios --no--codesign
+          flutter build ios --no-codesign
           cd build/ios/iphoneos
           mkdir Payload
           ln -s ../Runner.app
