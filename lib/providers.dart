@@ -45,7 +45,7 @@ AuthenticateUserUseCase getAuthenticateUserUseCase(
 }
 
 @riverpod
-Future<SignOutUseCase> getSignOutUseCase( GetSignOutUseCaseRef ref) async {
+Future<SignOutUseCase> getSignOutUseCase(GetSignOutUseCaseRef ref) async {
   final authRepository = ref.watch(getAuthRepositoryImplProvider);
   return SignOutUseCase(authRepository: authRepository);
 }
