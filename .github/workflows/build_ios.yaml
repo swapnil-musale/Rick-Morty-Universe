@@ -1,7 +1,11 @@
 name: "Build & Release - iOS"
 
 on:
-  push:
+  workflow_run:
+    workflows: ["Build Analyze and Test"]
+    branches: [master]
+    types:
+      - completed
 
 jobs:
   build:
