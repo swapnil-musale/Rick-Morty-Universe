@@ -52,7 +52,7 @@ dev_dependencies:
   custom_lint:
   riverpod_generator: ^2.3.1
   riverpod_lint: ^2.0.3
-  retrofit_generator: ^7.0.8
+  retrofit_generator: ^8.0.0
   json_serializable: ^6.7.1
   floor_generator: ^1.4.2
   injectable_generator: ^2.3.0
