@@ -44,38 +44,37 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDP4AXV79KyIIJyqivyrSMi51HSFp4a7SE',
-    appId: '1:819412544330:web:5115d6b4d562313f662fb3',
-    messagingSenderId: '819412544330',
-    projectId: 'rick-and-morty-universe-c04b0',
-    authDomain: 'rick-and-morty-universe-c04b0.firebaseapp.com',
-    storageBucket: 'rick-and-morty-universe-c04b0.appspot.com',
-    measurementId: 'G-0V1FDNNHXH',
+    apiKey: 'AIzaSyAopiQfiPk3DarnjFjBwIR59Fi7BmREws8',
+    appId: '1:156839349144:web:6841a949936f854fe039ed',
+    messagingSenderId: '156839349144',
+    projectId: 'rick-morty-universe',
+    authDomain: 'rick-morty-universe.firebaseapp.com',
+    storageBucket: 'rick-morty-universe.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyD3ZXugloE2wbNn5YpW21QSwy9QWurjPI8',
-    appId: '1:819412544330:android:d692bff4ed5d7ed6662fb3',
-    messagingSenderId: '819412544330',
-    projectId: 'rick-and-morty-universe-c04b0',
-    storageBucket: 'rick-and-morty-universe-c04b0.appspot.com',
+    apiKey: 'AIzaSyDmyShk3qE0qELIZsgYh5QzPcfq1Pz_Z5Y',
+    appId: '1:156839349144:android:dca8cc66cd7b3fefe039ed',
+    messagingSenderId: '156839349144',
+    projectId: 'rick-morty-universe',
+    storageBucket: 'rick-morty-universe.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDb16kr3Odioq-rD7DkB2VThF1Px63zdeA',
-    appId: '1:819412544330:ios:bc61611ea2e5f77d662fb3',
-    messagingSenderId: '819412544330',
-    projectId: 'rick-and-morty-universe-c04b0',
-    storageBucket: 'rick-and-morty-universe-c04b0.appspot.com',
+    apiKey: 'AIzaSyBLTBAiIl_4mQ2xUPl1G6IUg6j3KFnDtvs',
+    appId: '1:156839349144:ios:0508a5a54387335ae039ed',
+    messagingSenderId: '156839349144',
+    projectId: 'rick-morty-universe',
+    storageBucket: 'rick-morty-universe.appspot.com',
     iosBundleId: 'com.devx.ricknmorty.rickMortyUniverse',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDb16kr3Odioq-rD7DkB2VThF1Px63zdeA',
-    appId: '1:819412544330:ios:719bc084300e2ea1662fb3',
-    messagingSenderId: '819412544330',
-    projectId: 'rick-and-morty-universe-c04b0',
-    storageBucket: 'rick-and-morty-universe-c04b0.appspot.com',
+    apiKey: 'AIzaSyBLTBAiIl_4mQ2xUPl1G6IUg6j3KFnDtvs',
+    appId: '1:156839349144:ios:7d2c12450f04b4e2e039ed',
+    messagingSenderId: '156839349144',
+    projectId: 'rick-morty-universe',
+    storageBucket: 'rick-morty-universe.appspot.com',
     iosBundleId: 'com.devx.ricknmorty.rickMortyUniverse.RunnerTests',
   );
 }

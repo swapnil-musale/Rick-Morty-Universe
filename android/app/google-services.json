@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "819412544330",
-    "project_id": "rick-and-morty-universe-c04b0",
-    "storage_bucket": "rick-and-morty-universe-c04b0.appspot.com"
+    "project_number": "156839349144",
+    "project_id": "rick-morty-universe",
+    "storage_bucket": "rick-morty-universe.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:819412544330:android:d692bff4ed5d7ed6662fb3",
+        "mobilesdk_app_id": "1:156839349144:android:dca8cc66cd7b3fefe039ed",
         "android_client_info": {
           "package_name": "com.devx.ricknmorty.rick_morty_universe"
         }
       },
       "oauth_client": [],
-        "api_key": [
+      "api_key": [
         {
-          "current_key": "AIzaSyD3ZXugloE2wbNn5YpW21QSwy9QWurjPI8"
+          "current_key": "AIzaSyDmyShk3qE0qELIZsgYh5QzPcfq1Pz_Z5Y"
         }
       ],
       "services": {

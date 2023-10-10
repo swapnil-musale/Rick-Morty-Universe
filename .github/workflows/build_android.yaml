@@ -2,8 +2,8 @@ name: "Build & Release - Android"
 
 on:
   workflow_run:
-    workflows: ["Build Analyze and Test"]
-    branches: [master]
+    workflows: [ "Build Analyze and Test" ]
+    branches: [ master ]
     types:
       - completed
 
@@ -33,6 +33,5 @@ jobs:
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
           appId: ${{secrets.FIREBASE_APP_ID}}
-          token: ${{secrets.FIREBASE_TOKEN}}
-          groups: internal-testing
+          serviceCredentialsFileContent: ${{secrets.FIREBASE_SERVICE_ACCOUNT}}
           file: build/app/outputs/apk/release/app-release.apk
