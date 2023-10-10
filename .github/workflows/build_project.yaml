@@ -1,12 +1,8 @@
 name: "Build Analyze and Test"
 
 on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+  - push
+  - pull_request
 
 concurrency:
   group: ${{ github.ref }}
@@ -14,7 +10,7 @@ concurrency:
 
 jobs:
   build:
-    name: "Build & Release"
+    name: "Build Project"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
