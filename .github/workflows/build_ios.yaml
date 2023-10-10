@@ -2,8 +2,8 @@ name: "Build & Release - iOS"
 
 on:
   workflow_run:
-    workflows: ["Build Analyze and Test"]
-    branches: [master]
+    workflows: [ "Build Analyze and Test" ]
+    branches: [ master ]
     types:
       - completed
 
@@ -25,7 +25,6 @@ jobs:
       - run: |
           flutter build ios --release --no-codesign --dart-define=FLAVOR=production --target lib/main.dart
           cd build/ios/iphoneos
-#          mkdir Payload
           ln -s ../Runner.app
           cd ..
           zip -r app.ipa Payload
