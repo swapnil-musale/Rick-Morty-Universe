@@ -3,7 +3,7 @@ name: "Build & Release - Android"
 on:
   workflow_run:
     workflows: ["Build Analyze and Test"]
-    branches: [main]
+    branches: [master]
     types:
       - completed
 
