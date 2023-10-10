@@ -23,7 +23,7 @@ jobs:
       - run: flutter pub get
 
       - run: |
-          flutter build ios --no--codesign
+          flutter build ios --release --no-codesign --dart-define=FLAVOR=production --target lib/main.dart
           cd build/ios/iphoneos
           mkdir Payload
           ln -s ../Runner.app
